@@ -1,0 +1,70 @@
+{% extends "html/layout.html" %}
+
+{% block custom_css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'css/home.css') }}">
+{% endblock custom_css %}
+
+{% block content %}
+<div id="home">
+    <div class="row" id="gif">
+        <h1 class="text-center">Decimal to Binary</h1>
+        <iframe src="https://giphy.com/embed/3rlkIb3L5zPTsQEn81" width="250" height="300" frameBorder="0" allowfullscreen></iframe>
+    </div>
+    <!-- <button class="btn btn-primary" v-on:click="">add pic</button> -->
+    <form class="form-inline">
+        <div id="input" class="form-group mb-4">
+            <input class="form-control form-control-lg" type="text" placeholder="Enter a Number" v-model="number" @keypress="isNumber($event)">
+        </div>
+        <!-- <button type="submit" class="btn btn-primary mb-2">Confirm identity</button> -->
+    </form>
+    [[ dec_to_bin(this.number) ]]
+    <div class="row" id = "imgs">
+        <!-- <img v-for="num in bin_arr" :src="set_url(num)"/><br> -->
+        <span v-for="num in bin_arr"><img :src="set_url(num)"/><br><p class="number">[[num]]</p></span>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    var home = new Vue({
+        el: '#home',
+        delimiters: ['[[', ']]'],
+        data: {
+            i : 0,
+            number: "",
+            bin_arr: []
+        },
+        methods: {
+            dec_to_bin: function (numero) {
+                if (numero != "") {
+                    sr = Number(numero).toString(2);
+                    this.bin_arr = sr.split("");
+                } else {
+                    this.bin_arr = [];
+                }
+            },
+            set_url: function (number) {
+                if (number == "1") {
+                    return ('/static/img/opened_eyes.jpg');
+                } else {
+                    return ('/static/img/closed_eyes.jpg');
+                }
+            },
+            // I dont know how this funtion works but its beautiful
+            isNumber: function (evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                    evt.preventDefault();;
+                } else {
+                    return true;
+                }
+            }
+        },
+        computed: {
+
+        }
+    })
+</script>
+{% endblock js %}

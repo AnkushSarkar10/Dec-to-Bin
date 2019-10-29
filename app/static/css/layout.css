@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: linear-gradient(to right top, #123a74, #062e6d, #002266, #00165e, #000755);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Nunito', sans-serif;
+    color: aliceblue;
+    /* line-height:1.5; */
+	/* font-size: 30px !important; */
+}
